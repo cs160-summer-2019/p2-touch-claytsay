@@ -5,7 +5,7 @@
 <head>
 	<title>Touch Gestures Prototype</title>
 
-	<link href="https://fonts.googleapis.com/css?family=Fira+Sans" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Fira+Sans" rel="stylesheet" />
 	<link rel="stylesheet" type="text/css" href="{% static '/vendors/bootstrap/css/bootstrap.css' %}" />
 	<link rel="stylesheet" type="text/css" href="{% static '/css/main.css' %}" />
 
@@ -83,8 +83,43 @@
 			</div>
 		</div>
 	</div>
-	<script>
-	  // your solution here
+	<script>   
+    $("#rotate-box").hammer().bind("rotatestart", (event) => {
+      alert("You rotated the rotate-box!");
+    }).bind("rotateend", (event) => {
+      $("#rotate-box").data("hammer").get("rotate").set({ enable: false });
+    }).bind("press", (event) => {
+      let rotate = $("#rotate-box").data("hammer").get("rotate");
+      rotate.set({ enable: !rotate.options.enable });
+      alert(`The rotate-box has been ${rotate.options.enable ? "enabled" : "disabled" }.`);
+    });
+
+    $("#pinch-box").hammer().bind("pinchstart", (event) => {
+      alert("You pinched the pinch-box!");
+    }).bind("pinchend", (event) => {
+      $("#pinch-box").data("hammer").get("pinch").set({ enable: false });
+    }).bind("press", (event) => {
+      let pinch = $("#pinch-box").data("hammer").get("pinch");
+      pinch.set({ enable: !pinch.options.enable });
+      alert(`The pinch-box has been ${pinch.options.enable ? "enabled" : "disabled" }.`);
+    });
+    
+    $("#press-box").hammer().bind("press", (event) => {
+      alert("You pressed on the press-box!");
+    });
+    
+    $("#pan-box").hammer().bind("panright panleft", (event) => {
+      alert("You panned on the pan-box!");
+    });
+    
+    $("#tap-box").hammer().bind("tap", (event) => {
+      alert("You tapped on the tap-box!");
+    });
+    
+    $("#swipe-box").hammer().bind("swipe", (event) => {
+      alert(`You swiped on the swipe-box!`);
+    });
+    
   </script>
 </body>
 </html>
